@@ -1,0 +1,1775 @@
+{
+	"info": {
+		"_postman_id": "5c8adcb7-f88e-4343-8797-ab92b2836746",
+		"name": "Analyticdbi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "first admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Guto Belli\",\n    \"email\": \"gutob84@gmail.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/admin/first-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								"first-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"analyticdbiAdminToken\", JSON.parse(responseBody).token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gutob84@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/admin/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uuid\": \"1234567\",\n    \"emailMessage\": \"message\",\n    \"emailTo\": \"gutob84@gmail.com\",\n    \"emailFrom\": \"guto@appcloud.com.br\",\n    \"smtpHost\": \"smtp.sendgrid.net\",\n    \"smtpPort\": \"587\",\n    \"smtpUser\": \"apikey\",\n    \"smtpPass\": \"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\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/admin/forgot-password",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recover password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/admin/recover-password/:token",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								"recover-password",
+								":token"
+							],
+							"variable": [
+								{
+									"key": "token",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/admin",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/admin/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"carlos\",\n    \"emailTo\": \"cab_guto@hotmail.com\",\n    \"password\": \"123456\",\n    \"emailMessage\": \"mensagem\",\n    \"emailFrom\": \"reenviosenhas@gmail.com\",\n    \"smtpHost\": \"smtp.sendgrid.net\",\n    \"smtpPort\": \"587\",\n    \"smtpUser\": \"apikey\",\n    \"smtpPass\": \"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\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/admin/store",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Guto Belli\",\n    \"email\": \"gutob84@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/admin/:id/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								":id",
+								"update"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/admin/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"current_password\": \"12345678\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/admin/update-password",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/guto/Downloads/XDP icone.JPG"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/admin/:id/upload",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"admin",
+								":id",
+								"upload"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Firm",
+			"item": [
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Empresa Y\",\n    \"market_name\": \"Empresa Y\",\n    \"cnpj\": \"12345678901235\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/firms/store",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"firms",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/firms",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"firms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/firms/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"firms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Empresa X\",\n    \"market_name\": \"Empresa X\",\n    \"cnpj\": \"12345678901234\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/firms/:id/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"firms",
+								":id",
+								"update"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/firms/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"firms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"analyticdbiUserToken\", JSON.parse(responseBody).token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gutob84@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uuid\": \"12345678\",\n    \"emailMessage\": \"message\",\n    \"emailTo\": \"gutob84@gmail.com\",\n    \"emailFrom\": \"guto@appcloud.com.br\",\n    \"smtpHost\": \"smtp.sendgrid.net\",\n    \"smtpPort\": \"587\",\n    \"smtpUser\": \"apikey\",\n    \"smtpPass\": \"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\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/forgot-password",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recover password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/recover-password/:token",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"recover-password",
+								":token"
+							],
+							"variable": [
+								{
+									"key": "token",
+									"value": "12345678"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list by firm",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJHdXRvIiwiZW1haWwiOiJndXRvYjg0QGdtYWlsLmNvbSIsImZpcm1faWQiOjEsImZpbGVfdXJsIjpudWxsLCJpYXQiOjE2MjcxNDkwMzR9.du_vdBwCpJfadDSq0YHsB09nTrJodrF_mm3nHSn9rs8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firm_id\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/list-by-firm",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"list-by-firm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJHdXRvIiwiZW1haWwiOiJndXRvYjg0QGdtYWlsLmNvbSIsImZpcm1faWQiOjEsImZpbGVfdXJsIjpudWxsLCJpYXQiOjE2MjcxNDgxMDV9.QCvGR0WJ9lh_o4Q2hRe4aaw9C6lwhO8Z79YX9E5cxgo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/users/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store auth user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firm_id\": \"2\",\n    \"name\": \"Guto Belli\",\n    \"email\": \"cab_guto@hotmail.com\",\n    \"password\": \"123456\",\n    \"emailFrom\": \"reenviosenhas@gmail.com\",\n    \"emailMessage\": \"wowoww\",\n    \"smtpHost\": \"smtp.sendgrid.net\",\n    \"smtpPort\": \"587\",\n    \"smtpUser\": \"apikey\",\n    \"smtpPass\": \"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\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/store-auth-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"store-auth-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{server}}/users/update-password",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update auth user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Guto Belli\",\n    \"email\": \"gutob84@gmail.com\",\n    \"roles\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/:id/update-auth-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"update-auth-user"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/guto/Imagens/Captura de tela de 2021-12-09 15-24-55.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/:id/upload",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"upload"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firm_id\": \"2\",\n    \"name\": \"Guto Belli\",\n    \"email\": \"gutob84@gmail.com\",\n    \"password\": \"123456\",\n    \"emailFrom\": \"reenviosenhas@gmail.com\",\n    \"emailMessage\": \"wowoww\",\n    \"smtpHost\": \"smtp.sendgrid.net\",\n    \"smtpPort\": \"587\",\n    \"smtpUser\": \"apikey\",\n    \"smtpPass\": \"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\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/store",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Guto Belli\",\n    \"email\": \"gutob84@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/:id/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"update"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/guto/Imagens/guto.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/:id/admin-upload",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"admin-upload"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firm_id\": \"1\",\n    \"client_id\": \"80a6a70e-477c-4a2c-9257-730a0ac1ca37\",\n    \"username\": \"dayonoff@dayonoff.onmicrosoft.com\",\n    \"password\": \"GiGi@120500\",\n    \"reports\": \"100\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/accounts/store",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"accounts",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list by firm",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firm_id\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/accounts/list-by-firm",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"accounts",
+								"list-by-firm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server}}/accounts/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"accounts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firm_id\": \"1\",\n    \"client_id\": \"80a6a70e-477c-4a2c-9257-730a0ac1ca37\",\n    \"username\": \"dayonoff@dayonoff.onmicrosoft.com\",\n    \"password\": \"GiGi@120500\",\n    \"reports\": \"100\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/accounts/:id/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"accounts",
+								":id",
+								"update"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/accounts/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"accounts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Store report",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"8\",\n    \"name\": \"relatório\",\n    \"group_id\": \"f6640a7b-1205-41ee-bb31-518c4cd79dff\",\n    \"report_id\": \"86b05d86-864d-4af9-9ca7-dd78dda3b7ff\",\n    \"dataset_id\": \"8532a864-bca4-49d0-8635-a1fe838d6865\",\n    \"roles\": \"\",\n    \"report_card_id\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/reports/store",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reports",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List by user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/reports/list-by-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reports",
+								"list-by-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List by user with card",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/reports/list-by-user-with-card",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reports",
+								"list-by-user-with-card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show by report",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"10\",\n    \"report_id\": \"86b05d86-864d-4af9-9ca7-dd78dda3b7ff\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/reports/show-by-report",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reports",
+								"show-by-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update report",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group_id\": \"f6640a7b-1205-41ee-bb31-518c4cd79dff\",\n    \"report_id\": \"86b05d86-864d-4af9-9ca7-dd78dda3b7ff\",\n    \"dataset_id\": \"8532a864-bca4-49d0-8635-a1fe838d6865\",\n    \"name\": \"relatório\",\n    \"roles\": \"Page\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/reports/:id/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reports",
+								":id",
+								"update"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete report",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/reports/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reports",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/reports/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reports",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PowerBi",
+			"item": [
+				{
+					"name": "Load PowerBi groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/powerbi/groups",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"powerbi",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Load PowerBi reports",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{server}}/powerbi/groups/:id/reports",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"powerbi",
+								"groups",
+								":id",
+								"reports"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f6640a7b-1205-41ee-bb31-518c4cd79dff"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Load report aad",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group_id\": \"f6640a7b-1205-41ee-bb31-518c4cd79dff\",\n    \"report_id\": \"9c8bf49f-19a0-4384-a3d7-cd5e44a6a528\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/powerbi/reports/aad",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"powerbi",
+								"reports",
+								"aad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Load report embed",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group_id\": \"f6640a7b-1205-41ee-bb31-518c4cd79dff\",\n    \"report_id\": \"9c8bf49f-19a0-4384-a3d7-cd5e44a6a528\",\n    \"dataset\": \"3a88e308-2ffe-4271-993a-47b1cd1ed793\",\n    \"username\": \"teste2@gmail.com\",\n    \"roles\": \"Page\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/powerbi/reports/embed",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"powerbi",
+								"reports",
+								"embed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report Card",
+			"item": [
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "card 1",
+									"type": "text"
+								},
+								{
+									"key": "firm_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "report_id",
+									"value": "86b05d86-864d-4af9-9ca7-dd78dda3b7ff",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/report-cards/store",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"report-cards",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/report-cards/2",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"report-cards",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "card edit",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/report-cards/1/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"report-cards",
+								"1",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/report-cards/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"report-cards",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/guto/Imagens/guto.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/report-cards/2/upload",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"report-cards",
+								"2",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List by firm",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{analyticdbiUserToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firm_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/report-cards/list-by-firm",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"report-cards",
+								"list-by-firm"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "loclahost:5000",
+			"type": "string"
+		}
+	]
+}
