@@ -9,7 +9,8 @@ const db = knex({
     host: NODE_DB_HOST,
     user: NODE_DB_USER,
     password: NODE_DB_PASSWORD,
-    database: NODE_DB_DATABASE
+    database: NODE_DB_DATABASE,
+    requestTimeout: 600000
   }
 })
 

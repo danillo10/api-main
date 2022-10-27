@@ -127,6 +127,7 @@ class UserController {
         ? res.send(token.userToken(data))
         : formaterErrors(res, 404, 'Usuário ou senha incorreto.')
     } catch (error) {
+      console.log(error)
       serverError(res)
     }
   }
